@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,14 +20,14 @@ namespace Programming_Assignment_2_Summer_2021
             int[] nums = { 0, 1, 0, 3, 12 };
             Console.WriteLine("Enter the target number:");
             int target = Int32.Parse(Console.ReadLine());
-            int pos=SearchInsert(nums,target);
+            int pos = SearchInsert(nums, target);
             Console.WriteLine("Insert Position of the target is : {0}", pos);
             Console.WriteLine("");
 
             //Question3
             Console.WriteLine("Question 3");
             int[] ar3 = { 1, 2, 3, 1, 1, 3 };
-            int Lnum=LuckyNumber(ar3);
+            int Lnum = LuckyNumber(ar3);
             if (Lnum == -1)
                 Console.WriteLine("Given Array doesn't have any lucky Integer");
             else
@@ -80,13 +80,13 @@ namespace Programming_Assignment_2_Summer_2021
             Console.WriteLine("Question 9");
             int[] arr9 = { 7, 1, 5, 3, 6, 4 };
             int Ms = MaximumSum(arr9);
-            Console.WriteLine("Maximun Sum contiguous subarray {0}", Ma);   
+            Console.WriteLine("Maximun Sum contiguous subarray {0}", Ma);
             Console.WriteLine();
 
             //Question 10
             Console.WriteLine("Question 10");
             int[] costs = { 10, 15, 20 };
-            int minCost=MinCostToClimb(costs);
+            int minCost = MinCostToClimb(costs);
             Console.WriteLine("Minium cost to climb the top stair {0}", minCost);
             Console.WriteLine();
         }
@@ -108,7 +108,11 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                //write your code here.
+                var comman_elements = nums1.Intersect(nums2);
+                foreach (int elements in comman_elements)
+                {
+                    Console.WriteLine(elements);
+                }
             }
             catch (Exception)
             {
@@ -139,10 +143,32 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                //Write your Code here.
+                int i = 0;
+                int j = nums.Length - 1;
+
+
+                while (i <= j)
+                {
+                    int mid = (i + j) / 2;
+                    Console.WriteLine("j :" + j);
+                    if (target > nums[mid])
+                    {
+                        i = mid + 1;
+                    }
+                    else if (target < nums[mid])
+                    {
+                        //Console.WriteLine("mid :"+mid);
+                        j = mid - 1;
+                    }
+                    else
+                    {
+                        return mid;
+                    }
+                }
+                return i;
                 return -1;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw;
             }
@@ -163,8 +189,30 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                //write your code here.
-                return -1;
+                Array.Sort(nums);
+                int count = 1;
+                List<int> firstlist = new List<int>();
+                //Console.WriteLine(nums.Length);
+                for (int i = 0; i < nums.Length - 1; i++)
+                {
+                    //Console.WriteLine("i= "+i);
+                    if (nums[i] == nums[i + 1])
+                    {
+                        count++;
+                    }
+                    if (count == nums[i] && nums[i] != nums[i + 1])
+                    {
+                        firstlist.Add(nums[i]);
+                        count = 1;
+                    }
+                }
+                //Console.WriteLine(firstlist.Count);
+                firstlist.Sort();
+                if (firstlist.Count == 0)
+                {
+                    return -1;
+                }
+                return firstlist[firstlist.Count - 1];
             }
             catch (Exception)
             {
@@ -180,7 +228,7 @@ namespace Programming_Assignment_2_Summer_2021
         //•	nums[1] = 1
         //•	nums[2 * i] = nums[i]  when 2 <= 2 * i <= n
         //•	nums[2 * i + 1] = nums[i] + nums[i + 1] when 2 <= 2 * i + 1 <= n
-       // Return the maximum integer in the array nums.
+        // Return the maximum integer in the array nums.
 
         //Example 1:
         //Input: n = 7
@@ -197,12 +245,27 @@ namespace Programming_Assignment_2_Summer_2021
         //Hence, nums = [0, 1, 1, 2, 1, 3, 2, 3], and the maximum is 3.
 
         /// </summary>
-        private static int  GenerateNums(int n)
+        private static int GenerateNums(int n)
         {
             try
             {
-                //write your code here.
-                return -1;
+                int[] genNums = new int[n + 1];
+                genNums[0] = 0;
+                genNums[1] = 1;
+                for (int i = 2; i < n + 1; i++)
+                {
+                    int k = i / 2;
+                    if (i % 2 == 0)
+                    {
+                        genNums[i] = genNums[k];
+                    }
+                    else
+                    {
+                        genNums[i] = genNums[k] + genNums[k + 1];
+                    }
+                }
+                Array.Sort(genNums);
+                return genNums[genNums.Length - 1];
             }
             catch (Exception)
             {
@@ -225,7 +288,26 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                //write your code here.
+                foreach (List<string> path in paths)
+                {
+                    //Console.WriteLine(paths.Count);
+                    for (int i = 0; i < paths.Count; i++)
+                    {
+                        Console.WriteLine(i);
+
+                        if (path[1] == paths[i][1])
+                        {
+                            //Console.WriteLine(paths[i][0]);
+                            continue;
+                        }
+                        else
+                        {
+                            return paths[i][1];
+                        }
+
+                    }
+
+                }
                 return "";
             }
             catch (Exception)
@@ -246,11 +328,22 @@ namespace Programming_Assignment_2_Summer_2021
         //Explanation: The sum of 2 and 7 is 9. Therefore index1 = 1, index2 = 2.
 
         /// </summary>
-        private static void targetSum(int[] nums,int target)
+        private static void targetSum(int[] nums, int target)
         {
             try
             {
-                //write your code here.
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    for (int j = 1; j < nums.Length; j++)
+                    {
+                        int required_sum = nums[i] + nums[j];
+                        if (required_sum == target && i != j)
+                        {
+                            Console.WriteLine("[" + (i + 1) + "," + (j + 1) + "]");
+                            return;
+                        }
+                    }
+                }
 
             }
             catch (Exception)
@@ -285,7 +378,41 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                //write your code here.
+                Dictionary<int, List<int>> map = new Dictionary<int, List<int>>();
+                var scores = new List<int>();
+                //Console.WriteLine(items.Length);
+                for (int i = 0; i < items.Length / 2; i++)
+                {
+                    //Console.WriteLine("{"+items[i,0]+","+items[i,1]+"}");
+                    //Console.WriteLine(i);
+                    if (!map.ContainsKey(items[i, 0]))
+                    {
+                        //Console.WriteLine(items[i,0]);
+                        scores = new List<int>();
+                        map.Add(items[i, 0], scores);
+                    }
+                    else
+                    {
+                        scores = map[items[i, 0]];
+                    }
+                    scores.Add(items[i, 1]);
+                    map[items[i, 0]] = scores;
+                }
+                foreach (var pair in map)
+                {
+                    int key = pair.Key;
+                    List<int> value = pair.Value;
+                    value.Sort();
+                    value.Reverse();
+                    int sum = 0;
+                    for (int i = 0; i < 5; i++)
+                    {
+                        //Console.WriteLine(value[i]);
+                        sum = sum + value[i];
+                    }
+
+                    Console.WriteLine("[" + key + "," + sum / 5 + "]");
+                }
 
             }
             catch (Exception)
@@ -314,12 +441,38 @@ namespace Programming_Assignment_2_Summer_2021
         //rotate 2 steps to the right: [3,99,-1,-100]
         /// </summary>
 
-        private static void RotateArray(int[] arr,int n)
+        private static void RotateArray(int[] arr, int n)
         {
             try
             {
-                //write your code here.
-           
+                int[] arr_copy = new int[arr.Length];
+                arr.CopyTo(arr_copy, 0);
+                int j = 0;
+                while (j < n)
+                {
+                    //Console.WriteLine("j= "+j);
+                    for (int i = 0; i < arr.Length; i++)
+                    {
+                        int last = arr_copy[arr.Length - 1];
+                        if (i == 0)
+                        {
+                            //Console.WriteLine("last= "+last);
+                            arr[i] = last;
+                        }
+                        else
+                        {
+                            arr[i] = arr_copy[i - 1];
+                        }
+                        if (j == n - 1)
+                        {
+                            Console.Write(arr[i]);
+                        }
+                    }
+                    arr.CopyTo(arr_copy, 0);
+                    //Console.WriteLine("");
+                    j++;
+                }
+
             }
             catch (Exception)
             {
@@ -338,8 +491,8 @@ namespace Programming_Assignment_2_Summer_2021
         //Example 2:
         //Input: nums = [1]
         //Output: 1
-       // Example 3:
-       // Input: nums = [5,4,-1,7,8]
+        // Example 3:
+        // Input: nums = [5,4,-1,7,8]
         //Output: 23
         /// </summary>
 
@@ -347,8 +500,18 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                //write your code here.
-                return 0;
+                int MaximumoftheArray = arr[0];
+                int CurrentMaximum = arr[0];
+
+                for (int i = 1; i < arr.Length; i++)
+                {
+
+                    CurrentMaximum = Math.Max(arr[i], CurrentMaximum + arr[i]);
+                    MaximumoftheArray = Math.Max(MaximumoftheArray, CurrentMaximum);
+
+                }
+
+                return MaximumoftheArray;
             }
             catch (Exception)
             {
@@ -373,8 +536,33 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                //write your code here.
-                return 0;
+                int i = 0;
+                int sum = 0;
+                //Console.WriteLine("Length= "+costs.Length);
+                while (i < costs.Length - 1)
+                {
+                    //Console.WriteLine("i= "+i);
+                    if (i + 2 == costs.Length - 1)
+                    {
+                        if (costs[i] + costs[i + 2] > costs[i + 1])
+                        {
+                            sum = sum + costs[i + 1];
+                            return sum;
+                        }
+                    }
+                    if (costs[i] >= costs[i + 1])
+                    {
+                        sum = sum + costs[i + 1];
+                        i = i + 2;
+                    }
+                    else
+                    {
+                        sum = sum + costs[i];
+                        i = i + 1;
+                    }
+                    //Console.WriteLine("sum= "+sum);
+                }
+                return sum;
 
             }
             catch (Exception)
