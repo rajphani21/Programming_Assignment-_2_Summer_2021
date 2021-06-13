@@ -8,13 +8,12 @@ namespace Programming_Assignment_2_Summer_2021
     {
         public static void Main(string[] args)
         {
-            
             //Question1:
             Console.WriteLine("Question 1");
             int[] nums1 = { 2, 5, 1, 3, 4, 7 };
             int[] nums2 = { 2, 1, 4, 7 };
             Intersection(nums1, nums2);
-            Console.WriteLine("");
+            Console.WriteLine("\n");
 
             //Question 2 
             Console.WriteLine("Question 2");
