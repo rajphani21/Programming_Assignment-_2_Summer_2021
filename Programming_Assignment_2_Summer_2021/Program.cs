@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace Programming_Assignment_2_Summer_2021
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             //Question1:
             Console.WriteLine("Question 1");
@@ -73,8 +73,7 @@ namespace Programming_Assignment_2_Summer_2021
             int[] arr = { 1, 2, 3, 4, 5, 6, 7 };
             int K = 3;
             RotateArray(arr, K);
-
-            Console.WriteLine();
+            Console.WriteLine("\n");
 
             //Question 9
             Console.WriteLine("Question 9");
@@ -111,7 +110,7 @@ namespace Programming_Assignment_2_Summer_2021
                 var comman_elements = nums1.Intersect(nums2);
                 foreach (int elements in comman_elements)
                 {
-                    Console.WriteLine(elements);
+                    Console.Write(elements+" ");
                 }
             }
             catch (Exception)
@@ -150,7 +149,7 @@ namespace Programming_Assignment_2_Summer_2021
                 while (i <= j)
                 {
                     int mid = (i + j) / 2;
-                    Console.WriteLine("j :" + j);
+                    //Console.WriteLine("j :" + j);
                     if (target > nums[mid])
                     {
                         i = mid + 1;
@@ -293,7 +292,7 @@ namespace Programming_Assignment_2_Summer_2021
                     //Console.WriteLine(paths.Count);
                     for (int i = 0; i < paths.Count; i++)
                     {
-                        Console.WriteLine(i);
+                        //Console.WriteLine(i);
 
                         if (path[1] == paths[i][1])
                         {
@@ -445,7 +444,7 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                int[] arr_copy = new int[arr.Length];
+                /*int[] arr_copy = new int[arr.Length];
                 arr.CopyTo(arr_copy, 0);
                 int j = 0;
                 while (j < n)
@@ -471,6 +470,21 @@ namespace Programming_Assignment_2_Summer_2021
                     arr.CopyTo(arr_copy, 0);
                     //Console.WriteLine("");
                     j++;
+                }*/
+                int length = arr.Length;
+                n = n % length;
+
+                for (int i = 0; i < length; i++)
+                {
+                    //Console.WriteLine("i= "+i);
+                    if (i < n)
+                    {
+                        Console.Write(arr[length + i - n] + " ");
+                    }
+                    else
+                    {
+                        Console.Write(arr[i - n] + " ");
+                    }
                 }
 
             }
