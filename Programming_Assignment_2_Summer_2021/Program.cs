@@ -8,6 +8,7 @@ namespace Programming_Assignment_2_Summer_2021
     {
         public static void Main(string[] args)
         {
+            
             //Question1:
             Console.WriteLine("Question 1");
             int[] nums1 = { 2, 5, 1, 3, 4, 7 };
